@@ -138,12 +138,6 @@ func (r *DailyRecord) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type APIErrorEnvelope struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-	Data    any    `json:"data"`
-}
-
 type Page[T any] struct {
 	List     []T `json:"list"`
 	Total    int `json:"total"`

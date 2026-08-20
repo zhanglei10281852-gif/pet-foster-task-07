@@ -383,11 +383,7 @@ func writeAPIError(w http.ResponseWriter, err error) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	_ = json.NewEncoder(w).Encode(APIErrorEnvelope{
-		Code:    code,
-		Message: message,
-		Data:    nil,
-	})
+	_ = json.NewEncoder(w).Encode(map[string]any{"code": code, "message": message, "data": nil, "requestId": w.Header().Get("X-Request-ID")})
 }
 func queryInt(r *http.Request, key string) int {
 	value, _ := strconv.Atoi(r.URL.Query().Get(key))
